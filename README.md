@@ -29,7 +29,22 @@
     Added base scoring and misses
     Timer Added
 ```
+---
+# Screenshots
 
+   <div style="clear:both;text-align:center">
+    <img src="assets/images/screens/screen1.png"
+     alt="Lysandra - Javascript/HTML Matching Game."
+     style="float: left;" />
+     </div>
+
+<div style="clear:both;text-align:center">
+      <img src="assets/images/screens/screen2.png"
+     alt="Lysandra - Javascript/HTML Matching Game."
+     style="float: left; " />
+     </div>
+
+<div style="clear:both"></div>
 
 ## Credits
 
