@@ -1,0 +1,55 @@
+html, body {
+   height: 100%;
+   width: 100%;
+   margin: 0;
+}
+
+header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   text-align: center;
+}
+
+.button {
+   border-radius: 12px;
+   font-size:large;
+}
+
+.background {
+   background-image: linear-gradient(45deg, #3B3B7A 0%, #91617E 100%);
+}
+
+#score {
+   text-align: left;
+}
+
+.flex {
+   flex: 0 1 40px;
+ }
+
+.base-font {
+   font-family: 'Roboto', sans-serif;
+   font-family: 'Baloo Chettan 2', cursive;
+}
+
+.container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   text-align: center;
+}
+
+.bottom-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   flex-grow : 1;
+
+}
+
+.matchItem img {
+   height: 96px;
+   width: 96px;
+   padding-bottom: 20%;
+}

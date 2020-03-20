@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="yes" />
+    <meta name="screen-orientation" content="portrait" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/freeze-ui.min.css" type="text/css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="background">
+
+    <div style="height:100%">
+        <header>
+            <h3 class="base-font">
+                <div class="container">
+                     <div id="score">Score: 0</div> 
+                </div>  
+                
+                <div class="container">
+                    <div id="timer">Time: 0</div>
+               </div>  
+            </h3> 
+        </header>
+        <iframe src="assets/audio/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+        <span id="bgMusic">
+            <audio id="player" autoplay loop>
+             <source src="assets/audio/orchestra.mp3" type="audio/mp3">
+            </audio>
+        </span>
+
+        <div class="container">
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+        </div>
+
+        <div class="container">
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+        </div>
+
+        <div class="container">
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+        </div>
+
+        <div class="container">
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+            <div class="matchItem"></div>
+        </div>
+
+        <div class="bottom-container">
+            <div class="container flex">
+                <button id="btnRestart" class="base-font button" onClick="Game.start()">Restart</button>
+                <button id="btnMusic" class="base-font button" onClick="Game.toggleMusic('orchestra')">Music</button>
+                <button id="btnAbout" class="base-font button" onClick="window.location='https://johnfacey.dev'">About</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="assets/js/freeze-ui.min.js"></script>
+<script src="assets/js/game.js"></script>
+<script src="assets/js/main.js"></script>
+</html>
