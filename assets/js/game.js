@@ -59,7 +59,7 @@ const Game = {
             Game.toast('You Win');
             Game.calculateScore();
             //Calculate Score
-            var name = prompt("Please enter your 3 name", "JKF");
+            var name = prompt("Please enter your 3 name", "AAA");
 
             if (name != null) {
                 Game.saveScore(name.substring(0,3),Game.config.score);
@@ -69,6 +69,7 @@ const Game = {
     resetLeaderboard: function() {
         var gameStorage = window.localStorage;
         gameStorage.removeItem('scores');
+        Game.leaderboard();
     },
     leaderboard: function() {
         document.querySelector('#scoreTable').innerHTML = "";
@@ -251,12 +252,12 @@ const Game = {
                             FreezeUI({
                                 text: 'Matching'
                             });
-                        }, 500);
+                        }, 250);
 
 
                         setTimeout(() => {
                             UnFreezeUI(); //Call this anywhere and the UI will UnFreeze.
-                        }, 2000);
+                        }, 750);
 
                         //second match 
                         Game.config.secondMatch = this;
