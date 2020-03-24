@@ -56,14 +56,40 @@ const Game = {
     checkFinish: function () {
         if (document.querySelectorAll('.matchItem[matched="true"]').length == Game.config.totalTiles) {
             Game.stopTimer();
+
+
             Game.toast('You Win');
+            Swal.fire({
+                title: 'You Win!',
+                text: 'You matched all the tiles',
+                imageUrl: 'assets/images/logo.svg',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Lysandra Match Game',
+              })
+
+
             Game.calculateScore();
             //Calculate Score
-            var name = prompt("Please enter your 3 name", "AAA");
+            
+            Swal.fire({
+                title: 'Enter HighScore Tag',
+                input: 'text',
+              
+                showCancelButton: true,
+                inputValidator: (value) => {
+                  if (!value) {
+                    return 'You need to write something!'
+                  }
 
-            if (name != null) {
-                Game.saveScore(name.substring(0,3),Game.config.score);
-            }
+                  if (value.length != 3) {
+                    return '3 Characters Only'
+                  }
+                  Game.saveScore(name.substring(0,3),Game.config.score);
+
+                }
+              })
+
         }
     },
     resetLeaderboard: function() {
@@ -187,6 +213,8 @@ const Game = {
         return array;
 
     },
+
+
     start: function () {
 
         Game.config.phase = 1,
