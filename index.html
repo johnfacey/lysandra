@@ -1,35 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <title>Lysandra - Match Game</title>
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="assets/images/rogue.svg">
+    <meta name="description" content="Lysandra - Match Game">
     <meta name="full-screen" content="yes" />
+    <meta name="theme-color" content="#3F51B5">
     <meta name="screen-orientation" content="portrait" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/freeze-ui.min.css" type="text/css" rel="stylesheet"/>
+    <link href="assets/css/freeze-ui.min.css" type="text/css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body class="background">
 
-    <div style="height:100%">
+    <div id="settingsPanel" class="panel" style="height:100%;display:none">
+        <!-- Start Game Panel -->
         <header>
             <h3 class="base-font">
                 <div class="container">
-                     <div id="score">Score: 0</div> 
-                </div>  
-                
-                <div class="container">
-                    <div id="timer">Time: 0</div>
-               </div>  
-            </h3> 
+                    <div style="margin-right:10%"></div>
+                    <div>Settings</div>
+                    <div style="margin-left:10%"></div>
+                </div>
+            </h3>
         </header>
-        <iframe src="assets/audio/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+
+        <div class="container">
+            <div></div>
+            <div></div>
+            <div=>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="scorePanel" class="panel" style="height:100%;display:none">
+        <!-- Start Game Panel -->
+        <header>
+            <h3 class="base-font">
+                <div class="container">
+                    <div style="margin-right:10%"></div>
+                    <div>Leaderboard</div>
+                    <div style="margin-left:10%"></div>
+                </div>
+            </h3>
+        </header>
+
+        <div class="container">
+            <div class="base-font">Name</div>
+            <div class="base-font"></div>
+            <div class="base-font" >Score</div>
+        </div>
+
+        <div class="bottom-container" style="padding-top:10%"></div>
+        <div id="scoreTable">
+            <div class="container">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+ 
+
+    <div class="bottom-container" style="padding-top:10%">
+        <div class="container flex">
+           
+            <div>
+                <a href="#" onClick="Game.showPanel('gamePanel')">
+                    <img style="width:64px" src="assets/images/back.svg">
+                </a>
+            </div>
+
+            <div>
+                <a href="#" onClick="Game.toggleMusic('orchestra')">
+                    <img style="width:64px" src="assets/images/music.svg">
+                </a>
+            </div>
+
+            <div>
+                <a href="#" onClick="Game.resetLeaderboard()">
+                    <img style="width:64px" src="assets/images/delete.svg">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="gamePanel" class="panel" style="height:100%;display:block">
+        <!-- Start Game Panel -->
+        <header>
+            <h3 class="base-font">
+                <div class="container">
+                    <div id="score" style="margin-right:10%">Score: 0</div>
+                    <div id="miss">Missed: 0</div>
+                    <div id="timer" style="margin-left:10%">Time: 0</div>
+                </div>
+
+            </h3>
+        </header>
+        <iframe src="assets/audio/silence.mp3" type="audio/mp3" allow="autoplay" id="audio"
+            style="display:none"></iframe>
+        <div id="snackbar"></div>
         <span id="bgMusic">
             <audio id="player" autoplay loop>
-             <source src="assets/audio/orchestra.mp3" type="audio/mp3">
+                <source src="assets/audio/orchestra.mp3" type="audio/mp3">
             </audio>
         </span>
 
@@ -59,15 +141,44 @@
 
         <div class="bottom-container">
             <div class="container flex">
-                <button id="btnRestart" class="base-font button" onClick="Game.start()">Restart</button>
-                <button id="btnMusic" class="base-font button" onClick="Game.toggleMusic('orchestra')">Music</button>
-                <button id="btnAbout" class="base-font button" onClick="window.location='https://johnfacey.dev'">About</button>
+                
+                <div>
+                    <a href="#" onClick="Game.start()">
+                        <img style="width:64px" src="assets/images/restart.svg">
+                    </a>
+                </div>
+
+                <div>
+                    <a href="#" onClick="Game.leaderboard()">
+                        <img style="width:64px" src="assets/images/trophy.svg">
+                    </a>
+                </div>
+
+                <div>
+                    <a href="#" onClick="window.location='https://github.com/johnfacey/lysandra'">
+                        <img style="width:64px" src="assets/images/info.svg">
+                    </a>
+                </div>
+
+                
             </div>
         </div>
 
-    </div>
+    </div> <!-- End Game Panel -->
 </body>
 <script src="assets/js/freeze-ui.min.js"></script>
 <script src="assets/js/game.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            registration.update();
+            sw = registration;
+            //askPermission();
+        });
+    }
+</script>
+
 </html>

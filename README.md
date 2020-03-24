@@ -1,11 +1,11 @@
 
 # Lysandra - Javascript Matching Game
 
-<div style="clear:both;padding-bottom:100px">
+<div style="padding-bottom:100px;text-align:center;">
 <p>
 <img src="assets/images/logo.svg"
      alt="Lysandra - Javascript/HTML Matching Game."
-     style="float: left;  width:100px; height:100px" />
+     style="float: left; text-align:center; width:100px; height:100px" />
 </p>
 </div>
 
@@ -14,8 +14,6 @@
 
 ```
     Fix autoplay music permission
-    Add LocalStorage for retaining score
-    Add Scoreboard
     Add Spash Screen
     Revised css and background using flex
 ``` 
@@ -23,11 +21,13 @@
 
 ## Current Features
 ```
-    Music Added
-    jQuery Librarries removed
+    jQuery Libraries removed
     Matching logic fixed
     Added base scoring and misses
     Timer Added
+    Leaderboard Added
+    Add LocalStorage for retaining score
+    manifest.json added
 ```
 ---
 # Screenshots
