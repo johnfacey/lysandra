@@ -73,7 +73,7 @@ const Game = {
             //Calculate Score
             
             Swal.fire({
-                title: 'Enter HighScore Tag',
+                title: 'Enter Your Initials',
                 input: 'text',
               
                 showCancelButton: true,
@@ -85,7 +85,7 @@ const Game = {
                   if (value.length != 3) {
                     return '3 Characters Only'
                   }
-                  Game.saveScore(name.substring(0,3),Game.config.score);
+                  Game.saveScore(value.substring(0,3),Game.config.score);
 
                 }
               })
