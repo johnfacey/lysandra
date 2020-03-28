@@ -48,8 +48,10 @@
 
 ## Credits
 
-Author [johnfacey.dev](https://johnfacey.dev/)
+Author: [johnfacey.dev](https://johnfacey.dev/)
 
-Twitter [twitter.com/johnfacey](https://twitter.com/johnfacey)
+Twitter: [twitter.com/johnfacey](https://twitter.com/johnfacey)
 
-Icon Packs [Flat Icons / SmashIcons](www.flaticon.com)
+Game Ui Vectors by Vecteezy: [Vecteezy](https://www.vecteezy.com/free-vector/game-ui)
+
+Icon Packs: [Flat Icons / SmashIcons](www.flaticon.com)
