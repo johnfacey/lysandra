@@ -25,7 +25,7 @@ const Game = {
     ],
     tick: function () {
         Game.timer = setTimeout(() => {
-            document.querySelector("#timer").innerHTML = "Time: " + Game.config.time++;
+            document.querySelector("#timer").innerHTML = "Time " + Game.config.time++;
             Game.tick();
         }, 1000);
     },
@@ -37,21 +37,21 @@ const Game = {
     },
     addPoints: function (points) {
         Game.config.score += points;
-        document.querySelector("#score").innerHTML = "Score: " + Game.config.score;
+        document.querySelector("#score").innerHTML = "Score " + Game.config.score;
     },
     addMiss: function () {
         Game.config.miss += 1;
-        document.querySelector("#miss").innerHTML = "Miss: " + Game.config.miss;
+        document.querySelector("#miss").innerHTML = "Miss " + Game.config.miss;
     },
     resetPoints: function () {
         Game.config.score = 0;
-        document.querySelector("#score").innerHTML = "Score: " + Game.config.score;
+        document.querySelector("#score").innerHTML = "Score " + Game.config.score;
         Game.leaderboard();
         Game.showPanel("gamePanel");
     },
     resetMiss: function () {
         Game.config.score = 0;
-        document.querySelector("#miss").innerHTML = "Miss: " + Game.config.miss;
+        document.querySelector("#miss").innerHTML = "Miss " + Game.config.miss;
     },
     checkFinish: function () {
         if (document.querySelectorAll('.matchItem[matched="true"]').length == Game.config.totalTiles) {
@@ -59,14 +59,7 @@ const Game = {
 
 
             Game.toast('You Win');
-            Swal.fire({
-                title: 'You Win!',
-                text: 'You matched all the tiles',
-                imageUrl: 'assets/images/logo.svg',
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Lysandra Match Game',
-              })
+            
 
 
             Game.calculateScore();
@@ -86,6 +79,14 @@ const Game = {
                     return '3 Characters Only'
                   }
                   Game.saveScore(value.substring(0,3),Game.config.score);
+                  Swal.fire({
+                    title: 'You Win!',
+                    text: 'You matched all the tiles',
+                    imageUrl: 'assets/images/logo.svg',
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Lysandra Match Game',
+                  })
 
                 }
               })
