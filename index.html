@@ -172,15 +172,17 @@
 <script src="assets/js/game.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js').then(function (registration) {
-            // Registration was successful
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            registration.update();
-            sw = registration;
-            //askPermission();
-        });
-    }
+    if (location.protocol != "file:") {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                registration.update();
+                sw = registration;
+                //askPermission();
+            });
+        }
+    } 
 </script>
 
 </html>
