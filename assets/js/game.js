@@ -14,9 +14,19 @@ const Game = {
         timer: "",
         totalTiles: 12
     },
-    sounds: {
-
-    },
+    successArray: [
+        "Good Job",
+        "Great Match",
+        "Nice!",
+        "Your a Pro"
+    ]
+    ,
+    errorArray: [
+        "Not quite right",
+        "Try Again",
+        "So Close",
+        "Come on you can do it"
+    ],
     assets: [
         'img/asset1.png',
         'img/asset2.png',
@@ -37,7 +47,7 @@ const Game = {
     },
     addPoints: function (points) {
         Game.config.score += points;
-        document.querySelector("#score").innerHTML = "Score " + Game.config.score;
+        document.querySelector("#score").innerHTML = "Match " + Game.config.score;
     },
     addMiss: function () {
         Game.config.miss += 1;
@@ -45,7 +55,7 @@ const Game = {
     },
     resetPoints: function () {
         Game.config.score = 0;
-        document.querySelector("#score").innerHTML = "Score " + Game.config.score;
+        document.querySelector("#score").innerHTML = "Match " + Game.config.score;
         Game.leaderboard();
         Game.showPanel("gamePanel");
     },
@@ -219,7 +229,7 @@ const Game = {
     start: function () {
 
         Game.config.phase = 1,
-            Game.config.firstMatch = "";
+        Game.config.firstMatch = "";
         Game.config.secondMatch = "";
         Game.config.inPhase = false;
         Game.config.music = 0;
@@ -229,38 +239,21 @@ const Game = {
         Game.resetPoints();
         Game.resetMiss();
         Game.tick();
-        matchingGridOrigin = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
+        matchingGridOrigin = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
         matchingGrid = [];
         itemSet = [];
         matchingGrid = Game.shuffle(matchingGridOrigin);
         itemTypes = [0, 1, 2, 3, 4, 5];
 
         itemSet = document.getElementsByClassName('matchItem');
+        var tileSet = ["sword","axe","gem","key","bomb","shield","diamond","potion"];
 
         for (i = 0; i < itemSet.length; i++) {
 
             itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg' alt='Lysandra - Match Game' title='Lysandra - Match Game'/>";
-
             itemSet[i].setAttribute("matched", "false");
-            if (matchingGrid[i] == 0) {
-                itemSet[i].setAttribute("pic", "sword");
-            }
-            if (matchingGrid[i] == 1) {
-                itemSet[i].setAttribute("pic", "axe");
-            }
-            if (matchingGrid[i] == 2) {
-                itemSet[i].setAttribute("pic", "gem");
-            }
-            if (matchingGrid[i] == 3) {
-                itemSet[i].setAttribute("pic", "key");
-            }
-            if (matchingGrid[i] == 4) {
-                itemSet[i].setAttribute("pic", "bomb");
-            }
-            if (matchingGrid[i] == 5) {
-                itemSet[i].setAttribute("pic", "shield");
-            }
-            //diamond
+            itemSet[i].setAttribute("pic", tileSet[matchingGrid[i]]);
+
             if (Game.config.clickActive == false) {
                 itemSet[i].addEventListener("click", function () {
 
@@ -298,11 +291,15 @@ const Game = {
                             Game.config.firstMatch.setAttribute("matched", "true");
                             Game.config.secondMatch.setAttribute("matched", "true");
                             Game.playSound('success');
+                            var successMessage = Game.successArray[Math.floor(Math.random() * (Game.successArray.length-1))];
+                            Game.toast(successMessage);
                             Game.addPoints(10);
                         } else {
                             //did not match 
+                            var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
                             setTimeout("Game.resetState()", 1050);
                             Game.addMiss();
+                            Game.toast(errorMessage);
                         }
 
                     }
