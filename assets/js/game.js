@@ -4,7 +4,7 @@ const Game = {
         firstMatch: "",
         secondMatch: "",
         inPhase: false,
-        music: 0,
+        music: 1,
         clickActive: false,
         audioPath: "assets/audio/",
         imagePath: "assets/images/",
@@ -12,7 +12,8 @@ const Game = {
         score: 0,
         miss: 0,
         timer: "",
-        totalTiles: 12
+        totalTiles: 16,
+        backgroundMusic : ""
     },
     successArray: [
         "Good Job",
@@ -64,14 +65,8 @@ const Game = {
         document.querySelector("#miss").innerHTML = "Miss " + Game.config.miss;
     },
     checkFinish: function () {
-        if (document.querySelectorAll('.matchItem[matched="true"]').length == Game.config.totalTiles) {
+        if (document.querySelectorAll('.matchItem[matched="true"]').length == document.querySelectorAll('.matchItem').length) {
             Game.stopTimer();
-
-
-            Game.toast('You Win');
-            
-
-
             Game.calculateScore();
             //Calculate Score
             
@@ -96,9 +91,14 @@ const Game = {
                     imageWidth: 400,
                     imageHeight: 200,
                     imageAlt: 'Lysandra Match Game',
-                  })
-
+                  }).then((result) => {
+                   Game.showPanel('scorePanel');
+                    //}
+                  });
+                  Game.toast('You Win');
                 }
+              }).then((result) => {
+               
               })
 
         }
@@ -175,34 +175,51 @@ const Game = {
             x.className = x.className.replace("show", "");
         }, 3000);
     },
+    playMusic: function (audioName) {
+        Game.config.backgroundMusic = document.createElement('audio');
+        Game.config.backgroundMusic.volume = 0.3;
+        Game.config.backgroundMusic.loop = true;
+        Game.config.backgroundMusic.src = Game.config.audioPath + audioName + ".mp3";
+        Game.config.backgroundMusic.addEventListener("canplaythrough", new function () {
+            Game.config.backgroundMusic.play();
+        }, false);
+    },
+    pauseMusic: function() {
+        Game.config.backgroundMusic.pause();
+    },
+    resumeMusic: function() {
+        Game.config.backgroundMusic.play();
+    },
     playSound: function (audioName) {
         var audio = document.createElement('audio');
+        audio.volume = 0.3;
         audio.src = Game.config.audioPath + audioName + ".mp3";
         audio.addEventListener("canplaythrough", new function () {
             audio.play();
         }, false);
     },
-    toggleMusic: function (audioName) {
+    toggleMusic: function () {
         if (Game.config.music == 1) {
             Game.config.music = 0;
-            document.getElementById("bgMusic").innerHTML = "";
+            Game.pauseMusic();
             return;
         }
         if (Game.config.music == 0) {
             Game.config.music = 1;
-            document.getElementById("bgMusic").innerHTML =
-                "<embed src='" + Game.config.audioPath + audioName + ".mp3' hidden='true' autostart='true' loop='true' />";
+            Game.resumeMusic();
             return;
         }
     },
     resetState: function () {
         for (i = 0; i < itemSet.length; i++) {
             if (itemSet[i].getAttribute("matched") != "true") {
-                itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg' alt='Lysandra - Match Game' title='Lysandra - Match Game'/>";
+                itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
             }
         }
         Game.config.phase = 1;
         Game.config.inPhase = false;
+        var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
+        Game.toast(errorMessage);
     },
     shuffle: function (array) {
 
@@ -232,7 +249,7 @@ const Game = {
         Game.config.firstMatch = "";
         Game.config.secondMatch = "";
         Game.config.inPhase = false;
-        Game.config.music = 0;
+        Game.config.music = 1;
         Game.config.time = 0;
         Game.config.score = 0;
         Game.config.miss = 0;
@@ -250,7 +267,7 @@ const Game = {
 
         for (i = 0; i < itemSet.length; i++) {
 
-            itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg' alt='Lysandra - Match Game' title='Lysandra - Match Game'/>";
+            itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
             itemSet[i].setAttribute("matched", "false");
             itemSet[i].setAttribute("pic", tileSet[matchingGrid[i]]);
 
@@ -264,7 +281,7 @@ const Game = {
                         Game.playSound('scribble');
                     }
                     Game.config.inPhase = true;
-                    this.innerHTML = "<img src='" + Game.config.imagePath + this.getAttribute("pic") + ".svg' alt='Lysandra - Match Game' title='Lysandra - Match Game'/>";
+                    this.innerHTML = "<img src='" + Game.config.imagePath + this.getAttribute("pic") + ".svg'/>";
 
                     if (Game.config.phase == 1) {
                         Game.config.firstMatch = this;
@@ -299,7 +316,7 @@ const Game = {
                             var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
                             setTimeout("Game.resetState()", 1050);
                             Game.addMiss();
-                            Game.toast(errorMessage);
+                            
                         }
 
                     }

@@ -78,7 +78,7 @@
             </div>
 
             <div>
-                <a href="#" onClick="Game.toggleMusic('orchestra')">
+                <a href="#" onClick="Game.toggleMusic()">
                     <img style="width:64px" src="assets/images/music.svg">
                 </a>
             </div>
@@ -109,12 +109,16 @@
         <iframe src="assets/audio/silence.mp3" type="audio/mp3" allow="autoplay" id="audio"
             style="display:none"></iframe>
         <div id="snackbar"></div>
+        <!--
         <span id="bgMusic">
             <audio id="player" autoplay loop>
-                <source src="assets/audio/orchestra.mp3" type="audio/mp3">
+                <source src="assets/audio/bensound-epic.mp3" type="audio/mp3">
             </audio>
         </span>
+    -->
 
+       
+    <div id="gameMain">
         <div class="container">
             <div class="matchItem"></div>
             <div class="matchItem"></div>
@@ -142,8 +146,10 @@
             <div class="matchItem"></div>
             <div class="matchItem"></div>
         </div>
+    </div>
 
         <div style="display:block;border-bottom: 1px;border-top-style: solid;margin-bottom:5px"></div>
+        <footer class="footer">
         <div class="bottom-container">
             <div class="container flex">
                 
@@ -168,6 +174,7 @@
                 
             </div>
         </div>
+        </footer>
 
     </div> <!-- End Game Panel -->
 

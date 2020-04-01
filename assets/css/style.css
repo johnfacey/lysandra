@@ -2,13 +2,37 @@ html, body {
    height: 100%;
    width: 100%;
    margin: 0;
+   flex: 1 0 auto;
 }
 
+@keyframes bounce-background {
+   from {
+       background-position: left;
+   }
+   50% {
+       background-position: bottom;
+   }
+   to {
+       background-position: right;
+   }
+}
+#gameMain {
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   min-height: 60%;
+   margin-top:10%;
+}
 header {
    display: flex;
    flex-direction: row;
    justify-content: space-evenly;
    text-align: center;
+}
+
+.footer {
+   min-height: 10%;
+   max-height: 10%;
 }
 
 #settingsPanel {
@@ -26,6 +50,16 @@ header {
 
 .background {
    background-image: url('../images/background.svg');
+   animation-name: bounce-background;
+   animation-timing-function: ease-in-out;
+   animation-duration: 30s;
+   animation-iteration-count: infinite;
+
+   /* For Chrome & Safari */
+  -webkit-animation-name: bounce-background;
+  -webkit-animation-timing-function:ease-in-out;
+  -webkit-animation-duration:30s;
+  -webkit-animation-iteration-count:infinite;
 }
 
 #score {
@@ -61,7 +95,9 @@ header {
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
-   flex-grow : 1;
+   flex-grow : 0;
+   flex-shrink: 1;
+   margin-top:10%;
 
 }
 
@@ -71,6 +107,10 @@ header {
    padding-bottom: 20%;
 }
 
+header, main, footer {
+   flex-shrink: 0;
+}
+ 
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
    visibility: hidden; /* Hidden by default. Visible on click */
@@ -94,6 +134,9 @@ header {
    However, delay the fade out process for 2.5 seconds */
    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+   font-family: 'Roboto', sans-serif;
+   font-family: 'Baloo Chettan 2', cursive;
+   color: #fff;
  }
  
  /* Animations to fade the snackbar in and out */

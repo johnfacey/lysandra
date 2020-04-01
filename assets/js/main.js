@@ -12,12 +12,15 @@ function splashScreen() {
         imageHeight: 200,
         imageAlt: 'Open Source Match Game',
       }).then((result) => {
-        if (result.value) {
+        //if (result.value) {
             Game.start();
-        }
+            var context = new AudioContext();
+            Game.playMusic('bensound-epic');
+        //}
       })
 }
 
 window.onload = function () {
     splashScreen();
+    //var context = new AudioContext();
 };
