@@ -10,7 +10,8 @@
     <meta name="full-screen" content="yes" />
     <meta name="theme-color" content="#3F51B5">
     <meta name="screen-orientation" content="portrait" />
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="stylesheet" media="screen and (max-width: 1199px)" href="assets/css/style.css">
+    <link type="text/css" rel="stylesheet" media="screen and (min-width: 1200px)" href="assets/css/big.css">
     <link href="assets/css/freeze-ui.min.css" type="text/css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Roboto&display=swap"
@@ -73,19 +74,17 @@
            
             <div>
                 <a href="#" onClick="Game.showPanel('gamePanel')">
-                    <img style="width:64px" src="assets/images/back.svg">
+                    <img class="menuButton" src="assets/images/back.svg">
                 </a>
             </div>
 
             <div>
-                <a href="#" onClick="Game.toggleMusic()">
-                    <img style="width:64px" src="assets/images/music.svg">
-                </a>
+               
             </div>
 
             <div>
                 <a href="#" onClick="Game.resetLeaderboard()">
-                    <img style="width:64px" src="assets/images/delete.svg">
+                    <img class="menuButton" src="assets/images/delete.svg">
                 </a>
             </div>
         </div>
@@ -93,7 +92,7 @@
 
     </div>
 
-    <div id="gamePanel" class="panel" style="height:100%;display:block;border-bottom: 1px;border-top-style: solid;">
+    <div id="gamePanel" class="panel" style="display:block;border-bottom: 1px;border-top-style: solid;">
         <!-- Start Game Panel -->
         <header>
             <h3 class="base-font">
@@ -149,34 +148,40 @@
     </div>
 
         <div style="display:block;border-bottom: 1px;border-top-style: solid;margin-bottom:5px"></div>
-        <footer class="footer">
-        <div class="bottom-container">
-            <div class="container flex">
-                
-                <div>
-                    <a href="#" onClick="Game.start()">
-                        <img style="width:64px" src="assets/images/restart.svg">
-                    </a>
-                </div>
-
-                <div>
-                    <a href="#" onClick="Game.leaderboard()">
-                        <img style="width:64px" src="assets/images/trophy.svg">
-                    </a>
-                </div>
-
-                <div>
-                    <a href="#" onClick="window.location='https://github.com/johnfacey/lysandra'">
-                        <img style="width:64px" src="assets/images/info.svg">
-                    </a>
-                </div>
-
-                
-            </div>
-        </div>
-        </footer>
-
+        
     </div> <!-- End Game Panel -->
+            <footer class="footer panel">
+            <div class="bottom-container">
+                <div class="container flex">
+                    
+                    <div>
+                        <a href="#" onClick="Game.start()">
+                            <img class="menuButton" src="assets/images/restart.svg">
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="#" onClick="Game.toggleMusic()">
+                            <img class="menuButton" id="musicButton" src="assets/images/music-on.svg">
+                        </a>
+                    </div>
+    
+                    <div>
+                        <a href="#" onClick="Game.leaderboard()">
+                            <img class="menuButton" src="assets/images/trophy.svg">
+                        </a>
+                    </div>
+    
+                    <div>
+                        <a href="#" onClick="window.location='https://github.com/johnfacey/lysandra'">
+                            <img class="menuButton" src="assets/images/info.svg">
+                        </a>
+                    </div>
+    
+                    
+                </div>
+            </div>
+            </footer>
 
 </body>
 <script src="assets/js/freeze-ui.min.js"></script>

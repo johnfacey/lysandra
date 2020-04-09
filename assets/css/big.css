@@ -43,7 +43,7 @@ header {
 .footer {
    min-height: 10%;
    max-height: 10%;
-   margin-top: 10%;
+   margin-top: 5%;
 }
 
 #settingsPanel {
@@ -113,17 +113,17 @@ header {
 }
 
 .menuButton {
-   width:64px;
+   height:128px;
+   width:128px;
    border: #333;
    border-style:solid;
 }
 
 .matchItem img {
-   height: 70px;
-   width: 70px;
+   height: 90px;
+   width: 90px;
    padding-bottom: 20%;
 }
-
 
 header, main, footer {
    flex-shrink: 0;

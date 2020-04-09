@@ -5,7 +5,7 @@ function splashScreen() {
         showCancelButton: false,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Start',
+        confirmButtonText: 'Play Game',
         text: 'Match Game',
         imageUrl: 'assets/images/logo.svg',
         imageWidth: 400,
@@ -16,6 +16,7 @@ function splashScreen() {
             Game.start();
             var context = new AudioContext();
             Game.playMusic('bensound-epic');
+            Game.getSettings();
         //}
       })
 }

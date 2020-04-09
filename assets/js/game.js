@@ -103,6 +103,38 @@ const Game = {
 
         }
     },
+    getSettings: function() {
+        var gameStorage = window.localStorage;
+        var settings = gameStorage.getItem('settings');
+
+        if (settings == undefined) {
+            settings = 
+                {
+                    "music": 1
+                }
+            
+        } else {
+            settings = JSON.parse(settings);
+        }
+
+        if (settings.music == 1) { 
+            Game.resumeMusic(); 
+        } else { 
+            Game.pauseMusic();
+        }
+    },
+    saveSettings: function() {
+        var gameStorage = window.localStorage;
+       
+        var settings = 
+            {
+                "music": Game.config.music
+            }
+
+            var jsonSettings = JSON.stringify(settings);
+            gameStorage.setItem('settings',jsonSettings);
+            
+    },
     resetLeaderboard: function() {
         var gameStorage = window.localStorage;
         gameStorage.removeItem('scores');
@@ -162,6 +194,7 @@ const Game = {
         var panels = document.querySelectorAll(".panel");
         for (i=0;i<panels.length;i++) { panels[i].style.display = 'none';}
         document.querySelector("#"+panelName).style.display = 'block';
+        if (panelName == "gamePanel") {document.querySelector("footer").style.display = 'block';}
     },
     toast: function (message) {
         // Get the snackbar DIV
@@ -186,9 +219,11 @@ const Game = {
     },
     pauseMusic: function() {
         Game.config.backgroundMusic.pause();
+        document.querySelector('#musicButton').setAttribute("src",Game.config.imagePath + "music-off.svg");
     },
     resumeMusic: function() {
         Game.config.backgroundMusic.play();
+        document.querySelector('#musicButton').setAttribute("src",Game.config.imagePath + "music-on.svg");
     },
     playSound: function (audioName) {
         var audio = document.createElement('audio');
@@ -202,11 +237,13 @@ const Game = {
         if (Game.config.music == 1) {
             Game.config.music = 0;
             Game.pauseMusic();
+            Game.saveSettings();
             return;
         }
         if (Game.config.music == 0) {
             Game.config.music = 1;
             Game.resumeMusic();
+            Game.saveSettings();
             return;
         }
     },
