@@ -1,4 +1,4 @@
-const Game = {
+var Game = {
     config: {
         phase: 1,
         firstMatch: "",
@@ -26,7 +26,9 @@ const Game = {
         "Not quite right",
         "Try Again",
         "So Close",
-        "Come on you can do it"
+        "Come on you can do it",
+        "Good Try",
+        "Almost got it that time"
     ],
     assets: [
         'img/asset1.png',
@@ -65,7 +67,7 @@ const Game = {
         document.querySelector("#miss").innerHTML = "Miss " + Game.config.miss;
     },
     checkFinish: function () {
-        if (document.querySelectorAll('.matchItem[matched="true"]').length == document.querySelectorAll('.matchItem').length) {
+        if (document.querySelectorAll('.matchItem[matched="true"]').length === document.querySelectorAll('.matchItem').length) {
             Game.stopTimer();
             Game.calculateScore();
             //Calculate Score
@@ -80,7 +82,7 @@ const Game = {
                     return 'You need to write something!'
                   }
 
-                  if (value.length != 3) {
+                  if (value.length !== 3) {
                     return '3 Characters Only'
                   }
                   Game.saveScore(value.substring(0,3),Game.config.score);
@@ -107,7 +109,7 @@ const Game = {
         var gameStorage = window.localStorage;
         var settings = gameStorage.getItem('settings');
 
-        if (settings == undefined) {
+        if (settings === undefined) {
             settings = 
                 {
                     "music": 1
@@ -117,7 +119,7 @@ const Game = {
             settings = JSON.parse(settings);
         }
 
-        if (settings.music == 1) { 
+        if (settings.music === 1) { 
             Game.resumeMusic(); 
         } else { 
             Game.pauseMusic();
@@ -144,10 +146,10 @@ const Game = {
         document.querySelector('#scoreTable').innerHTML = "";
         var gameStorage = window.localStorage;
         var scores = JSON.parse(gameStorage.getItem('scores'));
-        if (scores == undefined) {
+        if (scores === undefined) {
 
         } else {
-            for (i=0;i<scores.length;i++) {
+            for (var i=0;i<scores.length;i++) {
               var scoreTemplate = `<div class="container">
                                         <div class="base-font">${scores[i].name}</div>
                                         <div class="base-font">---</div>
@@ -164,7 +166,7 @@ const Game = {
 
         var gameStorage = window.localStorage;
         var scores = JSON.parse(gameStorage.getItem('scores'));
-        if (scores == undefined) {
+        if (scores === undefined) {
             scores = [
                 {
                     "name": name,
@@ -192,9 +194,9 @@ const Game = {
     },
     showPanel: function(panelName) {
         var panels = document.querySelectorAll(".panel");
-        for (i=0;i<panels.length;i++) { panels[i].style.display = 'none';}
+        for (var i=0;i<panels.length;i++) { panels[i].style.display = 'none';}
         document.querySelector("#"+panelName).style.display = 'block';
-        if (panelName == "gamePanel") {document.querySelector("footer").style.display = 'block';}
+        if (panelName === "gamePanel") {document.querySelector("footer").style.display = 'block';}
     },
     toast: function (message) {
         // Get the snackbar DIV
@@ -213,7 +215,7 @@ const Game = {
         Game.config.backgroundMusic.volume = 0.3;
         Game.config.backgroundMusic.loop = true;
         Game.config.backgroundMusic.src = Game.config.audioPath + audioName + ".mp3";
-        Game.config.backgroundMusic.addEventListener("canplaythrough", new function () {
+        Game.config.backgroundMusic.addEventListener("canplaythrough", () => {
             Game.config.backgroundMusic.play();
         }, false);
     },
@@ -229,18 +231,18 @@ const Game = {
         var audio = document.createElement('audio');
         audio.volume = 0.3;
         audio.src = Game.config.audioPath + audioName + ".mp3";
-        audio.addEventListener("canplaythrough", new function () {
+        audio.addEventListener("canplaythrough", () => {
             audio.play();
         }, false);
     },
     toggleMusic: function () {
-        if (Game.config.music == 1) {
+        if (Game.config.music === 1) {
             Game.config.music = 0;
             Game.pauseMusic();
             Game.saveSettings();
             return;
         }
-        if (Game.config.music == 0) {
+        if (Game.config.music === 0) {
             Game.config.music = 1;
             Game.resumeMusic();
             Game.saveSettings();
@@ -248,9 +250,9 @@ const Game = {
         }
     },
     resetState: function () {
-        for (i = 0; i < itemSet.length; i++) {
-            if (itemSet[i].getAttribute("matched") != "true") {
-                itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
+        for (var i = 0; i < Game.itemSet.length; i++) {
+            if (Game.itemSet[i].getAttribute("matched") !== "true") {
+                Game.itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
             }
         }
         Game.config.phase = 1;
@@ -282,7 +284,7 @@ const Game = {
 
     start: function () {
 
-        Game.config.phase = 1,
+        Game.config.phase = 1;
         Game.config.firstMatch = "";
         Game.config.secondMatch = "";
         Game.config.inPhase = false;
@@ -293,25 +295,25 @@ const Game = {
         Game.resetPoints();
         Game.resetMiss();
         Game.tick();
-        matchingGridOrigin = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-        matchingGrid = [];
-        itemSet = [];
-        matchingGrid = Game.shuffle(matchingGridOrigin);
-        itemTypes = [0, 1, 2, 3, 4, 5];
+        Game.matchingGridOrigin = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+       // matchingGrid = [];
+        Game.itemSet = [];
+        Game.matchingGrid = Game.shuffle(Game.matchingGridOrigin);
+        Game.itemTypes = [0, 1, 2, 3, 4, 5];
 
-        itemSet = document.getElementsByClassName('matchItem');
+        Game.itemSet = document.getElementsByClassName('matchItem');
         var tileSet = ["sword","axe","gem","key","bomb","shield","diamond","potion"];
 
-        for (i = 0; i < itemSet.length; i++) {
+        for (var i = 0; i < Game.itemSet.length; i++) {
 
-            itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
-            itemSet[i].setAttribute("matched", "false");
-            itemSet[i].setAttribute("pic", tileSet[matchingGrid[i]]);
+            Game.itemSet[i].innerHTML = "<img src='" + Game.config.imagePath + "treasure.svg'/>";
+            Game.itemSet[i].setAttribute("matched", "false");
+            Game.itemSet[i].setAttribute("pic", tileSet[Game.matchingGrid[i]]);
 
-            if (Game.config.clickActive == false) {
-                itemSet[i].addEventListener("click", function () {
+            if (Game.config.clickActive === false) {
+                Game.itemSet[i].addEventListener("click", function () {
 
-                    if (this.getAttribute("matched") == "true" || this.querySelector('img').getAttribute("src").indexOf('treasure') == -1) {
+                    if (this.getAttribute("matched") === "true" || this.querySelector('img').getAttribute("src").indexOf('treasure') === -1) {
                         Game.playSound('error');
                         return;
                     } else {
@@ -320,7 +322,7 @@ const Game = {
                     Game.config.inPhase = true;
                     this.innerHTML = "<img src='" + Game.config.imagePath + this.getAttribute("pic") + ".svg'/>";
 
-                    if (Game.config.phase == 1) {
+                    if (Game.config.phase === 1) {
                         Game.config.firstMatch = this;
 
                     } else {
@@ -328,7 +330,7 @@ const Game = {
                             FreezeUI({
                                 text: 'Matching'
                             });
-                        }, 250);
+                        }, 250); 
 
 
                         setTimeout(() => {
@@ -340,7 +342,7 @@ const Game = {
                         //compare
                         var value1 = Game.config.firstMatch.getAttribute("pic");
                         var value2 = Game.config.secondMatch.getAttribute("pic");
-                        if (value1 == value2) {
+                        if (value1 === value2) {
                             //these pairs have match
                             Game.config.firstMatch.setAttribute("matched", "true");
                             Game.config.secondMatch.setAttribute("matched", "true");
@@ -348,10 +350,10 @@ const Game = {
                             var successMessage = Game.successArray[Math.floor(Math.random() * (Game.successArray.length-1))];
                             Game.toast(successMessage);
                             Game.addPoints(10);
-                        } else {
+                        } else { 
                             //did not match 
-                            var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
-                            setTimeout("Game.resetState()", 1050);
+                            //var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
+                            setTimeout(Game.resetState(), 1050);
                             Game.addMiss();
                             
                         }

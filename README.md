@@ -10,17 +10,22 @@
 </div>
 
 ---
+## Playable Version
+
+* Lysandra - Matching Game: [Play Now](https://johnfacey.github.io/lysandra/)
+---
 ## TODO
 
 ```
-    Fix autoplay music permission
-    Add Spash Screen
-    Revised css and background using flex
+Remote Shared Leaderboard
 ``` 
 ---
 
 ## Current Features
 ```
+    Fix autoplay music permission
+    Add Splash Screen
+    Revised css and background using flex
     jQuery Libraries removed
     Matching logic fixed
     Added base scoring and misses
@@ -50,6 +55,7 @@
 
 * Author: [johnfacey.dev](https://johnfacey.dev/)
 * Twitter: [twitter.com/johnfacey](https://twitter.com/johnfacey)
-* Game Ui Vectors by Vecteezy: [Vecteezy](https://www.vecteezy.com/free-vector/game-ui)
+* Fonts: [Google Fonts](https://fonts.google.com)
+* Vectors: [Vecteezy](https://www.vecteezy.com/free-vector/game-ui)
 * Icon Packs: [Flat Icons / SmashIcons](www.flaticon.com)
 * Music: [Bensound](https://www.bensound.com)
