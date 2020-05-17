@@ -145,8 +145,9 @@ var Game = {
     leaderboard: function() {
         document.querySelector('#scoreTable').innerHTML = "";
         var gameStorage = window.localStorage;
+        debugger;
         var scores = JSON.parse(gameStorage.getItem('scores'));
-        if (scores === undefined) {
+        if (gameStorage.length == 0 || scores === undefined) {
 
         } else {
             for (var i=0;i<scores.length;i++) {
