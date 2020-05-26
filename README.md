@@ -2,7 +2,7 @@
 # Lysandra - Javascript Matching Game
 
 <div style="padding-bottom:100px;text-align:center;">
-<p>
+<p style="text-align: center;"> 
 <img src="assets/images/logo.svg"
      alt="Lysandra - Javascript/HTML Matching Game."
      style="float: left; text-align:center; width:100px; height:100px" />
@@ -14,11 +14,11 @@
 
 * Lysandra - Matching Game: [Play Now](https://johnfacey.github.io/lysandra/)
 ---
-## TODO
+## Project Board
 
-```
-Remote Shared Leaderboard
-``` 
+
+* [Project Dev Board](https://github.com/johnfacey/lysandra/projects/1?)
+
 ---
 
 ## Current Features
