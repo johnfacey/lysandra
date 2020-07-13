@@ -119,7 +119,7 @@ var Game = {
             settings = JSON.parse(settings);
         }
 
-        if (settings.music === 1) { 
+        if (settings.music === 1) { //TODO: fix this crash on initial load
             Game.resumeMusic(); 
         } else { 
             Game.pauseMusic();
@@ -312,7 +312,7 @@ var Game = {
 
             if (Game.config.clickActive === false) {
                 Game.itemSet[i].addEventListener("click", function () {
-
+                    debugger;
                     if (this.getAttribute("matched") === "true" || this.querySelector('img').getAttribute("src").indexOf('treasure') === -1) {
                         Game.playSound('error');
                         return;
@@ -324,18 +324,9 @@ var Game = {
 
                     if (Game.config.phase === 1) {
                         Game.config.firstMatch = this;
-
+                        Game.config.phase = 2;
                     } else {
-                        setTimeout(() => {
-                            FreezeUI({
-                                text: 'Matching'
-                            });
-                        }, 250); 
-
-
-                        setTimeout(() => {
-                            UnFreezeUI(); //Call this anywhere and the UI will UnFreeze.
-                        }, 750);
+                       
 
                         //second match 
                         Game.config.secondMatch = this;
@@ -353,15 +344,28 @@ var Game = {
                         } else { 
                             //did not match 
                             //var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
-                            setTimeout(Game.resetState(), 1050);
+                            setTimeout(() => {
+                                FreezeUI({
+                                    text: 'Matching'
+                                });
+                            }, 250); 
+    
+    
+                            setTimeout(() => {
+                                UnFreezeUI(); //Call this anywhere and the UI will UnFreeze.
+                                setTimeout(Game.resetState(), 3000);
+                            }, 750);
+                            //setTimeout(Game.resetState(), 3000);
                             Game.addMiss();
                             
                         }
 
                     }
-                    Game.config.phase++;
-                    if (Game.config.phase > 2) {
-                        Game.config.phase = 1;
+                   
+                    if (Game.config.phase >= 2) {
+                        //Game.config.phase = 1;
+                    } else {
+                        //Game.config.phase = 2;
                     }
                     Game.config.inPhase = false;
                     Game.checkFinish();
