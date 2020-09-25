@@ -13,15 +13,14 @@ var Game = {
         miss: 0,
         timer: "",
         totalTiles: 16,
-        backgroundMusic : ""
+        backgroundMusic: ""
     },
     successArray: [
         "Good Job",
         "Great Match",
         "Nice!",
         "Your a Pro"
-    ]
-    ,
+    ],
     errorArray: [
         "Not quite right",
         "Try Again",
@@ -45,7 +44,7 @@ var Game = {
     stopTimer: function () {
         clearTimeout(Game.timer);
     },
-    calculateScore: function() {
+    calculateScore: function () {
         Game.config.score -= Game.config.miss;
     },
     addPoints: function (points) {
@@ -71,132 +70,139 @@ var Game = {
             Game.stopTimer();
             Game.calculateScore();
             //Calculate Score
-            
+
             Swal.fire({
                 title: 'Enter Your Initials',
                 input: 'text',
-              
+
                 showCancelButton: true,
                 inputValidator: (value) => {
-                  if (!value) {
-                    return 'You need to write something!'
-                  }
+                    if (!value) {
+                        return 'You need to write something!'
+                    }
 
-                  if (value.length !== 3) {
-                    return '3 Characters Only'
-                  }
-                  Game.saveScore(value.substring(0,3),Game.config.score);
-                  Swal.fire({
-                    title: 'You Win!',
-                    text: 'You matched all the tiles',
-                    imageUrl: 'assets/images/logo.svg',
-                    imageWidth: 400,
-                    imageHeight: 200,
-                    imageAlt: 'Lysandra Match Game',
-                  }).then((result) => {
-                   Game.showPanel('scorePanel');
-                    //}
-                  });
-                  Game.toast('You Win');
+                    if (value.length !== 3) {
+                        return '3 Characters Only'
+                    }
+                    Game.saveScore(value.substring(0, 3), Game.config.score);
+                    Swal.fire({
+                        title: 'You Win!',
+                        text: 'You matched all the tiles',
+                        imageUrl: 'assets/images/logo.svg',
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        imageAlt: 'Lysandra Match Game',
+                    }).then((result) => {
+                        Game.showPanel('scorePanel');
+                        //}
+                    });
+                    Game.toast('You Win');
                 }
-              }).then((result) => {
-               
-              })
+            }).then((result) => {
+
+            })
 
         }
     },
-    getSettings: function() {
+    getSettings: function () {
         var gameStorage = window.localStorage;
         var settings = gameStorage.getItem('settings');
 
         if (settings === undefined) {
-            settings = 
-                {
-                    "music": 1
-                }
-            
+            settings = {
+                "music": 1
+            }
+
         } else {
             settings = JSON.parse(settings);
         }
 
-        if (settings.music === 1) { //TODO: fix this crash on initial load
-            Game.resumeMusic(); 
-        } else { 
-            Game.pauseMusic();
+        if (settings == undefined || settings == null) {
+            Game.resumeMusic();
+        } else {
+            if (settings.music === 1) { //TODO: fix this crash on initial load
+                Game.resumeMusic();
+            } else {
+                Game.pauseMusic();
+            }
         }
     },
-    saveSettings: function() {
+    saveSettings: function () {
         var gameStorage = window.localStorage;
-       
-        var settings = 
-            {
-                "music": Game.config.music
-            }
 
-            var jsonSettings = JSON.stringify(settings);
-            gameStorage.setItem('settings',jsonSettings);
-            
+        var settings = {
+            "music": Game.config.music
+        }
+
+        var jsonSettings = JSON.stringify(settings);
+        gameStorage.setItem('settings', jsonSettings);
+
     },
-    resetLeaderboard: function() {
+    resetLeaderboard: function () {
         var gameStorage = window.localStorage;
         gameStorage.removeItem('scores');
         Game.leaderboard();
     },
-    leaderboard: function() {
+    leaderboard: function () {
         document.querySelector('#scoreTable').innerHTML = "";
         var gameStorage = window.localStorage;
         var scores = JSON.parse(gameStorage.getItem('scores'));
-        if (gameStorage.length == 0 || scores === null ||scores === undefined) {
+        if (gameStorage.length == 0 || scores === null || scores === undefined) {
 
         } else {
-            for (var i=0;i<scores.length;i++) {
-              var scoreTemplate = `<div class="container">
+            for (var i = 0; i < scores.length; i++) {
+                var scoreTemplate = `<div class="container">
                                         <div class="base-font">${scores[i].name}</div>
                                         <div class="base-font">---</div>
                                         <div class="base-font">${scores[i].value}</div>
                                     </div>`;
-                        
+
                 document.querySelector('#scoreTable').insertAdjacentHTML("beforeend", scoreTemplate);
             }
             //alert(scores[0].value)
         }
         Game.showPanel('scorePanel');
     },
-    saveScore: function(name,score) {
+    saveScore: function (name, score) {
 
         var gameStorage = window.localStorage;
         var scores = JSON.parse(gameStorage.getItem('scores'));
         if (scores === undefined) {
-            scores = [
-                {
-                    "name": name,
-                    "value": score
-                }
-            ]
+            scores = [{
+                "name": name,
+                "value": score
+            }]
         } else {
-            scores.push({"name": name, "value": score});
+            scores.push({
+                "name": name,
+                "value": score
+            });
         }
 
-        if (scores.length < 11){
-            
+        if (scores.length < 11) {
+
         } else {
             scores.sort(function (a, b) {
                 return a.value - b.value;
             });
-              while (scores.length > 10) {
+            while (scores.length > 10) {
                 scores = scores.pop();
-              }
+            }
         }
 
         var jsonScores = JSON.stringify(scores);
-        gameStorage.setItem('scores',jsonScores);
-        
+        gameStorage.setItem('scores', jsonScores);
+
     },
-    showPanel: function(panelName) {
+    showPanel: function (panelName) {
         var panels = document.querySelectorAll(".panel");
-        for (var i=0;i<panels.length;i++) { panels[i].style.display = 'none';}
-        document.querySelector("#"+panelName).style.display = 'block';
-        if (panelName === "gamePanel") {document.querySelector("footer").style.display = 'block';}
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].style.display = 'none';
+        }
+        document.querySelector("#" + panelName).style.display = 'block';
+        if (panelName === "gamePanel") {
+            document.querySelector("footer").style.display = 'block';
+        }
     },
     toast: function (message) {
         // Get the snackbar DIV
@@ -219,13 +225,13 @@ var Game = {
             Game.config.backgroundMusic.play();
         }, false);
     },
-    pauseMusic: function() {
+    pauseMusic: function () {
         Game.config.backgroundMusic.pause();
-        document.querySelector('#musicButton').setAttribute("src",Game.config.imagePath + "music-off.svg");
+        document.querySelector('#musicButton').setAttribute("src", Game.config.imagePath + "music-off.svg");
     },
-    resumeMusic: function() {
+    resumeMusic: function () {
         Game.config.backgroundMusic.play();
-        document.querySelector('#musicButton').setAttribute("src",Game.config.imagePath + "music-on.svg");
+        document.querySelector('#musicButton').setAttribute("src", Game.config.imagePath + "music-on.svg");
     },
     playSound: function (audioName) {
         var audio = document.createElement('audio');
@@ -257,7 +263,7 @@ var Game = {
         }
         Game.config.phase = 1;
         Game.config.inPhase = false;
-        var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
+        var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length - 1))];
         Game.toast(errorMessage);
     },
     shuffle: function (array) {
@@ -296,13 +302,13 @@ var Game = {
         Game.resetMiss();
         Game.tick();
         Game.matchingGridOrigin = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-       // matchingGrid = [];
+        // matchingGrid = [];
         Game.itemSet = [];
         Game.matchingGrid = Game.shuffle(Game.matchingGridOrigin);
         Game.itemTypes = [0, 1, 2, 3, 4, 5];
 
         Game.itemSet = document.getElementsByClassName('matchItem');
-        var tileSet = ["sword","axe","gem","key","bomb","shield","diamond","potion"];
+        var tileSet = ["sword", "axe", "gem", "key", "bomb", "shield", "diamond", "potion"];
 
         for (var i = 0; i < Game.itemSet.length; i++) {
 
@@ -326,7 +332,7 @@ var Game = {
                         Game.config.firstMatch = this;
                         Game.config.phase = 2;
                     } else {
-                       
+
 
                         //second match 
                         Game.config.secondMatch = this;
@@ -338,30 +344,30 @@ var Game = {
                             Game.config.firstMatch.setAttribute("matched", "true");
                             Game.config.secondMatch.setAttribute("matched", "true");
                             Game.playSound('success');
-                            var successMessage = Game.successArray[Math.floor(Math.random() * (Game.successArray.length-1))];
+                            var successMessage = Game.successArray[Math.floor(Math.random() * (Game.successArray.length - 1))];
                             Game.toast(successMessage);
                             Game.addPoints(10);
-                        } else { 
+                        } else {
                             //did not match 
                             //var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
                             setTimeout(() => {
                                 FreezeUI({
                                     text: 'Matching'
                                 });
-                            }, 250); 
-    
-    
+                            }, 250);
+
+
                             setTimeout(() => {
                                 UnFreezeUI(); //Call this anywhere and the UI will UnFreeze.
                                 setTimeout(Game.resetState(), 3000);
                             }, 750);
                             //setTimeout(Game.resetState(), 3000);
                             Game.addMiss();
-                            
+
                         }
 
                     }
-                   
+
                     if (Game.config.phase >= 2) {
                         //Game.config.phase = 1;
                     } else {
