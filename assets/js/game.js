@@ -318,9 +318,9 @@ var Game = {
 
             if (Game.config.clickActive === false) {
                 Game.itemSet[i].addEventListener("click", function () {
-                    debugger;
                     if (this.getAttribute("matched") === "true" || this.querySelector('img').getAttribute("src").indexOf('treasure') === -1) {
                         Game.playSound('error');
+                        Game.config.phase = 1;
                         return;
                     } else {
                         Game.playSound('scribble');
