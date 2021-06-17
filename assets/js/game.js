@@ -350,6 +350,7 @@ var Game = {
                         } else {
                             //did not match 
                             //var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
+                            Game.config.phase = 1;
                             setTimeout(() => {
                                 FreezeUI({
                                     text: 'Matching'
