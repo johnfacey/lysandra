@@ -15,7 +15,7 @@ function splashScreen() {
         //if (result.value) {
             Game.start();
             var context = new AudioContext();
-            Game.playMusic('bensound-epic');
+            //Game.playMusic('bensound-epic');
             Game.getSettings();
         //}
       })
