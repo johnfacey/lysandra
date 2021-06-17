@@ -347,10 +347,11 @@ var Game = {
                             var successMessage = Game.successArray[Math.floor(Math.random() * (Game.successArray.length - 1))];
                             Game.toast(successMessage);
                             Game.addPoints(10);
+                            Game.config.phase = 1;
                         } else {
                             //did not match 
                             //var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length-1))];
-                            Game.config.phase = 1;
+                            
                             setTimeout(() => {
                                 FreezeUI({
                                     text: 'Matching'
