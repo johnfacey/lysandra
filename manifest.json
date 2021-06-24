@@ -3,6 +3,7 @@
     "name": "Lysandra - Match Game",
     "orientation": "portrait-primary",
     "categories": ["games", "gaming", "matching","card"],
+    "description": "Lysandra Card/Tile Matching Game",
     "shortcuts": [
       {
         "name": "Open Game",
@@ -28,8 +29,8 @@
     ],
       "screenshots": [
         {
-            "src": "[Embedded]",
-            "sizes": "assets/images/1280x800.png",
+            "src": "assets/images/1280x800.png",
+            "sizes": "1280x800",
             "type": "image/png"
         },
         {
