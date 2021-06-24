@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "io.github.johnfacey.twa",
+                   "sha256_cert_fingerprints": ["F3:94:70:CB:AB:2B:E6:9F:4B:8E:57:1C:69:33:77:2C:1E:88:9F:DC:CD:73:33:26:C1:EC:56:4B:BE:C7:27:30"] }
+    }]
