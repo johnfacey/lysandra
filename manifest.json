@@ -10,7 +10,7 @@
         "short_name": "Play Lysandra",
         "description": "Play Game",
         "url": "https://johnfacey.github.io/lysandra/",
-        "icons": [{ "src": "/assets/logo.svg", "sizes": "192x192" }]
+        "icons": [{ "src": "/assets/images/logo.svg", "sizes": "192x192" }]
       }
     ],
     "lang": "en",
