@@ -1,6 +1,17 @@
 {
     "short_name": "Lysandra",
     "name": "Lysandra - Match Game",
+    "orientation": "portrait-primary",
+    "categories": ["games", "gaming", "matching","card"],
+    "shortcuts": [
+      {
+        "name": "Open Game",
+        "short_name": "Play Lysandra",
+        "description": "Play Game",
+        "url": "https://johnfacey.github.io/lysandra/",
+        "icons": [{ "src": "/assets/logo.svg", "sizes": "192x192" }]
+      }
+    ],
     "icons": [
       {
         "src": "assets/images/logo.svg",
@@ -14,6 +25,13 @@
       }
   
     ],
+      "screenshots": [{
+        "src": "images/screen1.png",
+        "sizes": "800x600",
+        "platform": "wide",
+        "label": "Lysandra Screen Shot"
+      }]
+    ,
     "start_url": "https://johnfacey.github.io/lysandra/",
     "background_color": "#3F51B5",
     "display": "standalone",
