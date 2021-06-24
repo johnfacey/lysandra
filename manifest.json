@@ -12,6 +12,7 @@
         "icons": [{ "src": "/assets/logo.svg", "sizes": "192x192" }]
       }
     ],
+    "lang": "en",
     "icons": [
       {
         "src": "assets/images/logo.svg",
@@ -25,12 +26,17 @@
       }
   
     ],
-      "screenshots": [{
-        "src": "images/screen1.png",
-        "sizes": "800x600",
-        "platform": "wide",
-        "label": "Lysandra Screen Shot"
-      }]
+      "screenshots": [
+        {
+            "src": "[Embedded]",
+            "sizes": "assets/images/1280x800.png",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/images/750x1334.png",
+            "sizes": "750x1334",
+            "type": "image/png"
+        }]
     ,
     "start_url": "https://johnfacey.github.io/lysandra/",
     "background_color": "#3F51B5",
