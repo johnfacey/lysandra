@@ -108,7 +108,7 @@ var Game = {
         var gameStorage = window.localStorage;
         var settings = gameStorage.getItem('settings');
 
-        if (settings === undefined) {
+        if (settings === undefined || settings === null) {
             settings = {
                 "music": 1
             }
@@ -117,7 +117,7 @@ var Game = {
             settings = JSON.parse(settings);
         }
 
-        if (settings == undefined || settings == null) {
+        if (settings == undefined || settings === null) {
             Game.resumeMusic();
         } else {
             if (settings.music === 1) { //TODO: fix this crash on initial load
@@ -167,7 +167,7 @@ var Game = {
 
         var gameStorage = window.localStorage;
         var scores = JSON.parse(gameStorage.getItem('scores'));
-        if (scores === undefined) {
+        if (scores === null || scores === undefined) {
             scores = [{
                 "name": name,
                 "value": score
