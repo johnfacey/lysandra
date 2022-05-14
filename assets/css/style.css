@@ -21,7 +21,11 @@ html, body {
    flex-direction: column;
    flex-grow: 1;
    min-height: 50%;
-   margin-top:5%;
+}
+
+.panel {
+   height:85%;
+   background: color #000;
 }
 header {
    display: flex;
@@ -41,9 +45,8 @@ header {
 }
 
 .footer {
-   min-height: 10%;
-   max-height: 10%;
-   margin-top: 10%;
+   background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
 #settingsPanel {
@@ -108,7 +111,6 @@ header {
    justify-content: space-evenly;
    flex-grow : 0;
    flex-shrink: 1;
-   margin-top:2%;
 
 }
 
@@ -119,7 +121,7 @@ header {
 }
 
 .matchItem img {
-   height: 70px;
+   height: 100%;
    width: 70px;
    padding-bottom: 20%;
 }

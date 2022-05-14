@@ -13,7 +13,8 @@ var Game = {
         miss: 0,
         timer: "",
         totalTiles: 16,
-        backgroundMusic: ""
+        backgroundMusic: "",
+        anim1 : 100
     },
     successArray: [
         "Good Job",
@@ -266,6 +267,25 @@ var Game = {
         var errorMessage = Game.errorArray[Math.floor(Math.random() * (Game.errorArray.length - 1))];
         Game.toast(errorMessage);
     },
+    animateScreen() {
+       
+        if (document.querySelector('#anim1').style.webkitTransform == 'scaleX(-1)') {
+            Game.config.anim1 += 1;
+        } else {
+            Game.config.anim1 -= 1;
+        }
+        document.querySelector('#anim1').style.marginLeft = Game.config.anim1+'%';
+
+        if (document.querySelector('#anim1').style.marginLeft == '0%') {
+            document.querySelector('#anim1').style.webkitTransform = 'scaleX(-1)';
+        }
+        if (document.querySelector('#anim1').style.marginLeft == '70%') {
+            document.querySelector('#anim1').style.webkitTransform = 'scaleX(1)';
+        }
+        setTimeout(function () {
+            Game.animateScreen();
+        }, 50);
+    },
     shuffle: function (array) {
 
         var currentIndex = array.length;
@@ -298,6 +318,7 @@ var Game = {
         Game.config.time = 0;
         Game.config.score = 0;
         Game.config.miss = 0;
+        Game.config.anim1 = 100;
         Game.resetPoints();
         Game.resetMiss();
         Game.tick();
@@ -383,5 +404,9 @@ var Game = {
             } //end false check
         }
         Game.config.clickActive = true;
+
+        setTimeout(function () {
+            Game.animateScreen();
+        }, 1000);
     }
 }
